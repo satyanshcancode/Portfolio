@@ -1,0 +1,8 @@
+# Without this, Netlify serves the source index.html (which points at
+# /src/main.tsx) instead of the Vite build output.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

@@ -1,0 +1,183 @@
+/* TechStrip component
+   Full-bleed: a direct child of <main>, which has no max-width, so the grid
+   spans the viewport. Equal columns come from repeat(N, minmax(0, 1fr)) - the
+   old rule was a wrapping flex row with flex-shrink: 0, so items sat at their
+   natural width and bunched to the left. */
+
+.techstrip {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  z-index: 1; /* under the hero, so the cutout overlaps it */
+}
+
+.techstrip ul {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.techstrip li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: clamp(1.1rem, 2.6vh, 1.75rem) 0.5rem;
+  text-align: center;
+  font-size: clamp(0.82rem, 1.05vw, 1rem);
+  border-left: 1px solid var(--rule);
+}
+.techstrip li:first-child { border-left: 0; }
+
+/* one size for every glyph, whatever its source viewBox */
+.techstrip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(1.8rem, 2.4vw, 2.3rem);
+  height: clamp(1.8rem, 2.4vw, 2.3rem);
+  flex: none;
+}
+.techstrip__icon svg { width: 100%; height: 100%; display: block; }
+
+.techstrip__label {
+  color: var(--paper);
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* 3 x 2 before the six columns get cramped */
+@media (max-width: 900px) {
+  .techstrip ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .techstrip li:nth-child(3n + 1) { border-left: 0; }
+  .techstrip li:nth-child(n + 4) { border-top: 1px solid var(--rule); }
+}
+
+/* 2 x 3 rather than six unreadable slivers */
+@media (max-width: 560px) {
+  .techstrip ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .techstrip li { border-left: 1px solid var(--rule); }
+  .techstrip li:nth-child(3n + 1) { border-left: 1px solid var(--rule); }
+  .techstrip li:nth-child(odd) { border-left: 0; }
+  .techstrip li:nth-child(n + 3) { border-top: 1px solid var(--rule); }
+}
+
+/* MobileNav component */
+
+.mobilenav {
+  position: relative;
+}
+
+/* Hide the trigger button above 560px breakpoint */
+@media (min-width: 561px) {
+  .mobilenav {
+    display: none;
+  }
+}
+
+.mobilenav__trigger {
+  position: relative;
+  z-index: 16; /* above the panel, so it also closes the menu */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.mobilenav__trigger:hover {
+  color: var(--signal);
+}
+
+.mobilenav__trigger:active {
+  transform: scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobilenav__trigger:active {
+    transform: none;
+  }
+}
+
+.mobilenav__panel {
+  /* .nav sets backdrop-filter, which makes it the containing block for fixed
+     children - so `bottom: 0` would resolve against the header, not the
+     viewport. Height is stated outright instead. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100svh;
+  z-index: 15;
+  background: rgba(15, 20, 51, 0.95);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  padding: calc(env(safe-area-inset-top, 0px) + 5rem) var(--gutter) var(--gutter);
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobilenav--open .mobilenav__panel {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobilenav__panel {
+    transition: none;
+  }
+}
+
+.mobilenav__panel nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobilenav__panel a {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.mobilenav__panel a:hover {
+  color: var(--signal);
+}
+
+.mobilenav__panel a:focus-visible {
+  outline: 2px solid var(--packet);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Ensure focus styles are never suppressed */
+.mobilenav__trigger:focus-visible {
+  outline: 2px solid var(--packet);
+  outline-offset: 4px;
+  border-radius: 2px;
+}

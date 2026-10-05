@@ -1,0 +1,190 @@
+/* Projects section. Everything is scoped under .projects-v2 so it can sit
+   next to the global rules in index.css without touching them. */
+
+.projects-v2 .pv2-card {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(2rem, 5vh, 3.5rem) 0;
+  border-top: 1px solid var(--rule);
+}
+.projects-v2 .pv2-card:first-child { border-top: 0; padding-top: 0; }
+@media (max-width: 800px) {
+  .projects-v2 .pv2-card { grid-template-columns: 1fr; }
+}
+
+/* Header column */
+.projects-v2 .pv2-head { min-width: 0; align-self: start; }
+.projects-v2 .pv2-head h3 {
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  font-weight: 700;
+  font-stretch: 85%;
+  margin-bottom: 0.6rem;
+  text-wrap: balance;
+}
+.projects-v2 .pv2-when { font-size: 0.95rem; }
+.projects-v2 .pv2-context {
+  margin-top: 0.5rem;
+  max-width: 34ch;
+  font-size: 0.95rem;
+  color: var(--packet);
+}
+.projects-v2 .pv2-head .tags { margin-top: 1.25rem; }
+.projects-v2 .pv2-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+/* The demo is the stronger call to action: a pill, not another text link. */
+.projects-v2 .pv2-demo {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border: 1.5px solid var(--packet);
+  border-radius: 999px;
+  background: var(--packet);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+.projects-v2 .pv2-demo:hover { background: transparent; color: var(--packet); }
+
+/* Body column */
+.projects-v2 .pv2-body {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+  max-width: 64ch;
+}
+.projects-v2 .pv2-block { min-width: 0; display: grid; gap: 0.75rem; }
+.projects-v2 .pv2-block > p { color: var(--paper-dim); }
+.projects-v2 .pv2-block h4,
+.projects-v2 .pv2-block h5 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.projects-v2 .pv2-block h5 { color: var(--signal); letter-spacing: 0.08em; }
+
+/* Same dotted list as the rest of the page, scoped. */
+.projects-v2 .pv2-bullets { display: grid; gap: 0.6rem; color: var(--paper-dim); }
+.projects-v2 .pv2-bullets li { padding-left: 1.2rem; position: relative; }
+.projects-v2 .pv2-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+/* Evidence */
+.projects-v2 .pv2-evidence { gap: 1.5rem; }
+.projects-v2 .pv2-sub { min-width: 0; display: grid; gap: 0.6rem; }
+.projects-v2 .pv2-sub p { font-size: 0.95rem; }
+
+/* Stages read as a sequence, numbered and chevroned, not a bullet list. */
+.projects-v2 .pv2-pipeline {
+  counter-reset: stage;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+.projects-v2 .pv2-pipeline li {
+  counter-increment: stage;
+  position: relative;
+  padding-left: 2.4rem;
+  color: var(--paper-dim);
+}
+.projects-v2 .pv2-pipeline li::before {
+  content: counter(stage) ' ›';
+  position: absolute;
+  left: 0;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Code excerpt: the pre scrolls inside itself, never the page. */
+.projects-v2 .pv2-excerpt { margin: 0; min-width: 0; display: grid; gap: 0.5rem; }
+.projects-v2 .pv2-excerpt figcaption {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--paper-dim);
+  overflow-wrap: anywhere;
+}
+.projects-v2 .pv2-excerpt pre {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+.projects-v2 .pv2-excerpt code { white-space: pre; }
+.projects-v2 .pv2-excerpt a { font-size: 0.9rem; justify-self: start; }
+
+/* Diagram: contains its own overflow; the svg keeps a legible minimum. */
+.projects-v2 .pv2-diagram {
+  margin-top: 0.5rem;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.projects-v2 .pv2-diagram svg { display: block; min-width: 330px; height: auto; }
+
+.projects-v2 .pv2-d-box { fill: var(--ink); fill-opacity: 0.65; stroke: var(--rule); stroke-width: 1; }
+.projects-v2 .pv2-d-box--accent { stroke: var(--signal); }
+.projects-v2 .pv2-d-group { fill: none; stroke: var(--rule); stroke-width: 1; stroke-dasharray: 3 4; }
+.projects-v2 .pv2-d-flow { fill: none; stroke: var(--signal); stroke-width: 1; }
+.projects-v2 .pv2-d-flow--dash { stroke: var(--paper-dim); stroke-dasharray: 3 3; }
+.projects-v2 .pv2-d-head { fill: var(--signal); }
+.projects-v2 .pv2-d-label { fill: var(--paper); font-family: var(--body); font-size: 12.5px; }
+.projects-v2 .pv2-d-sub { fill: var(--paper-dim); font-family: var(--body); font-size: 10.5px; }
+.projects-v2 .pv2-d-edge { fill: var(--paper-dim); font-family: var(--body); font-size: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-v2 .pv2-demo { transition: none; }
+}
+
+/* "Know more": the detail of each project, folded away so the cards stay scannable. */
+.projects-v2 .pv2-more { border-top: 1px solid var(--rule); }
+.projects-v2 .pv2-more > summary {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.9rem 0; cursor: pointer;
+  font-family: var(--display); font-weight: 600; font-size: 1rem;
+  color: var(--signal); list-style: none;
+}
+.projects-v2 .pv2-more > summary::-webkit-details-marker { display: none; }
+.projects-v2 .pv2-more > summary::before {
+  content: ''; flex: none; width: 0.5rem; height: 0.5rem;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); transition: transform 0.2s;
+}
+.projects-v2 .pv2-more[open] > summary::before { transform: rotate(-135deg); }
+.projects-v2 .pv2-more > summary:hover { color: var(--packet); }
+.projects-v2 .pv2-more__inner { display: grid; gap: 1.75rem; padding-bottom: 0.5rem; min-width: 0; }
+
+/* Four identical toggles need the project name for a screen reader. */
+.projects-v2 .pv2-vh {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-v2 .pv2-more > summary::before { transition: none; }
+}
