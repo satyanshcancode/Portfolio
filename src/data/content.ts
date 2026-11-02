@@ -10,7 +10,7 @@ export const profile = {
   email: 'satyans94@gmail.com',
   github: 'https://github.com/satyanshcancode',
   linkedin: 'https://www.linkedin.com/in/satyansh-can-code',
-  resume: './Satyansh_Singh_Resume.pdf',
+  resume: 'https://docs.google.com/document/d/1NLtfNYJLcCxQ78RjJ8C8SbgNUd3CDuEu/edit?usp=sharing&ouid=105377303278972984080&rtpof=true&sd=true',
   about: [
     'I’m a B.Tech Computer Science student at Lovely Professional University, specialising in cloud computing and graduating in 2028.',
     'Most of what I build sits where infrastructure meets security: auditing who can do what in an AWS account, keeping sessions alive on a bad network, and putting access rules on-chain where an administrator can’t quietly bend them.',
@@ -332,12 +332,44 @@ export const stack = [
   { group: 'Databases', items: ['PostgreSQL', 'MySQL', 'MongoDB'] },
 ]
 
-export const certificates = [
-  { title: 'Database Management System, Part 1', by: 'Infosys Springboard', when: 'Aug 2026' },
-  { title: 'Cloud Craft skill development course', by: 'CPE, LPU', when: 'Jul 2026' },
-  { title: 'Red Hat System Administration I (RH124)', by: 'Red Hat', when: 'Jul 2025' },
-  { title: 'RHCSA summer training', by: 'CPE, LPU', when: 'Jul 2025' },
-  { title: 'Communication and public speaking', by: 'Lovely Professional University', when: 'Oct 2024' },
+export type Certificate = {
+  title: string
+  by: string
+  when: string
+  url?: string
+}
+
+export const certificates: Certificate[] = [
+  {
+    title: 'Database Management System, Part 1',
+    by: 'Infosys Springboard',
+    when: 'Aug 2026',
+    url: 'https://drive.google.com/file/d/1nAjcRcpLu9dPMq33sOvWPOPi_6KL1eUr/view?usp=sharing',
+  },
+  {
+    title: 'Cloud Craft skill development course',
+    by: 'CPE, LPU',
+    when: 'Jul 2026',
+    url: 'https://drive.google.com/file/d/12b0OYCTG5CNSgAhvpqzHYXnWceu9gZuu/view?usp=sharing',
+  },
+  {
+    title: 'Red Hat System Administration I (RH124)',
+    by: 'Red Hat',
+    when: 'Jul 2025',
+    url: 'https://www.credly.com/badges/a772e789-484a-41ba-8254-d6ed11d3c9ee/linked_in_profile',
+  },
+  {
+    title: 'RHCSA summer training: Mastering Linux System Administration',
+    by: 'CPE, LPU',
+    when: 'Jul 2025',
+    url: 'https://www.linkedin.com/posts/satyansh-can-code_mastering-linux-administration-activity-7364578957083439106-GqZN',
+  },
+  {
+    title: 'Communication and public speaking',
+    by: 'Lovely Professional University',
+    when: 'Oct 2024',
+    url: 'https://www.linkedin.com/posts/satyansh-can-code_communicationskills-careergrowth-publicspeaking-activity-7290698471534206976-VwvZ',
+  },
 ]
 
 /** Used by both the contact section and the footer, so they can’t drift apart. */

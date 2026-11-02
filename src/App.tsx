@@ -220,7 +220,13 @@ export default function App() {
             <ul className="certs">
               {certificates.map((c) => (
                 <li key={c.title}>
-                  <span>{c.title}</span>
+                  {c.url ? (
+                    <a className="link" href={c.url} target="_blank" rel="noreferrer">
+                      {c.title}
+                    </a>
+                  ) : (
+                    <span>{c.title}</span>
+                  )}
                   <span className="muted">{c.by}, {c.when}</span>
                 </li>
               ))}

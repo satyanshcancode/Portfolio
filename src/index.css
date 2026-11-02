@@ -217,6 +217,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.45rem; line-hei
 .stack > div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }
 .stack dt { color: var(--paper-dim); }
 .certs li { display: grid; gap: 0.1rem; }
+.certs a { justify-self: start; }
 .certs .muted { font-size: 0.95rem; }
 
 /* Contact */
